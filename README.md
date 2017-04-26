@@ -1,6 +1,6 @@
 # GETIN-Template
 
-This is the starting place for web apps created for the EVE GETIN alliance with a [Vue.js](https://vuejs.org/) front-end and [Flask](http://flask.pocoo.org/) back-end and [EVE's SSO via CREST](https://eveonline-third-party-documentation.readthedocs.io/en/latest/) to authenticate.
+This is the starting place for web apps created for the EVE GETIN alliance with a [Vue.js](https://vuejs.org/) front-end and [Flask](http://flask.pocoo.org/) back-end and [EVE's SSO via CREST](https://eveonline-third-party-documentation.readthedocs.io/en/latest/) for authentication.
 
 ## Components
 
