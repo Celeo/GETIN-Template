@@ -6,10 +6,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     corporation = db.Column(db.String)
+    allaince = db.Column(db.String)
 
-    def __init__(self, name, corporation):
+    def __init__(self, name, corporation, alliance):
         self.name = name
         self.corporation = corporation
+        self.alliance = alliance
 
     @property
     def is_authenticated(self):
@@ -25,9 +27,7 @@ class User(db.Model):
 
     @property
     def in_alliance(self):
-        return self.corporation in [
-            'Wormbro'
-        ]
+        return self.alliance == 'The Society For Unethical Treatment Of Sleepers'
 
     def get_id(self):
         return str(self.id)

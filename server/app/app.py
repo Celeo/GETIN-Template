@@ -1,14 +1,18 @@
 from flask import Flask, jsonify
 from flask_restful import Api
+from flask_cors import CORS
 from preston.crest import Preston as CREST
 from preston.xmlapi import Preston as XMLAPI
 
-from .shared import db, eveapi
+from .shared import db, eveapi, config
 from .views.login import EVE_SSO_Resource
+from .views.account import Account_Resource
 
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
+config.update(app.config)
+CORS(app)
 api = Api(app)
 db.app = app
 db.init_app(app)
@@ -30,3 +34,4 @@ def index():
 
 
 api.add_resource(EVE_SSO_Resource, '/eve/sso')
+api.add_resource(Account_Resource, '/account')

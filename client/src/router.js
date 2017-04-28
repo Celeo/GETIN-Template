@@ -6,6 +6,7 @@ import store from './data'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
+import LoginCallback from './pages/LoginCallback'
 
 
 Vue.use(VueRouter)
@@ -13,7 +14,8 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', component: Landing, name: 'Landing' },
   { path: '/login', component: Login, name: 'Login' },
-  { path: '/logout', component: Logout, name: 'Logout' }
+  { path: '/logout', component: Logout, name: 'Logout' },
+  { path: '/eve/callback', component: LoginCallback, name: 'LoginCallback' }
 ]
 
 const router = new VueRouter({
@@ -30,7 +32,7 @@ router.beforeEach((to, from, next) => {
     looking at the landing page, redirect them away from their detination
     to the landing page.
   */
-  if (to.name !== 'Login' && to.name !== 'Logout' && to.name !== 'Landing') {
+  if (['Login', 'Logout', 'Landing', 'LoginCallback'].indexOf(to.name) === -1) {
     if (!store.getters.isLoggedIn) {
       next({ name: 'Landing' })
       return

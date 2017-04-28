@@ -31,9 +31,6 @@ export default {
     },
     member() {
       return this.$store.getters.inAlliance
-    },
-    approved() {
-      return this.$store.getters.approved
     }
   }
 }
@@ -71,4 +68,10 @@ $link-focus-border: $primary;
 #brand
   font-weight 600
   font-size 24px
+
+.fade-enter-active, .fade-leave-active
+  transition opacity .2s
+
+.fade-enter, .fade-leave-active
+  opacity 0
 </style>

@@ -24,7 +24,7 @@ console.log(`Server url: ${url}`)
 const token = window.sessionStorage.getItem('token')
 if (token) {
   const tokenData = decode(token)
-  if (typeof tokenData.name !== undefined) {
+  if (typeof tokenData.name !== 'undefined') {
     store.commit('LOG_IN', { token, tokenData })
   } else {
     window.sessionStorage.removeItem('token')

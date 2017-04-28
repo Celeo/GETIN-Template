@@ -27,8 +27,8 @@ export default {
   },
   async created() {
     try {
-      const response = await this.$store.getters.axios.get(`${Vue.config.SERVER_URL}eve`)
-      this.url = response.ssoLink
+      const response = await this.$store.getters.axios.get(`${Vue.config.SERVER_URL}eve/sso`)
+      this.url = response.data.url
       this.error = false
     } catch (error) {
       this.error = true

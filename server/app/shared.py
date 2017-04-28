@@ -7,3 +7,4 @@ eveapi = {
     'crest': None,
     'xml': None
 }
+config = {}

@@ -9,7 +9,6 @@ const state = {
   token: null,
   name: null,
   inAlliance: false,
-  approved: false,
   axios: axios.create()
 }
 
@@ -19,7 +18,6 @@ const mutations = {
     state.token = token
     state.name = tokenData.name
     state.inAlliance = tokenData.inAlliance
-    state.approved = tokenData.approved
     state.axios = axios.create({ headers: { Authorization: token } })
   },
 
@@ -27,7 +25,6 @@ const mutations = {
     state.token = null
     state.name = null
     state.inAlliance = false
-    state.approved = false
     state.axios = axios.create()
   }
 }
@@ -47,10 +44,6 @@ const getters = {
 
   inAlliance(state) {
     return state.inAlliance
-  },
-
-  approved(state) {
-    return state.approved
   },
 
   axios(state) {
