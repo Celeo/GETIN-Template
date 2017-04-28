@@ -1,1 +1,6 @@
-FROM python:3.6-onbuild
+FROM python:3.6
+
+RUN mkdir /srv/app
+WORKDIR /srv/app
+COPY requirements.txt /srv/app
+RUN pip install -r requirements.txt

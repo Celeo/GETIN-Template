@@ -3,10 +3,12 @@ from .shared import db
 
 class User(db.Model):
 
+    __tablename__ = 'getin_user'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     corporation = db.Column(db.String)
-    allaince = db.Column(db.String)
+    alliance = db.Column(db.String)
 
     def __init__(self, name, corporation, alliance):
         self.name = name

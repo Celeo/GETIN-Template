@@ -3,4 +3,3 @@ env
 __pycache__
 *.log
 config.cfg
-*.db

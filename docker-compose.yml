@@ -1,0 +1,41 @@
+version: '2.1'
+services:
+  db:
+    image: postgres:9
+    # volumes:
+      # - "/srv/getin-template:/pgdata"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -h localhost -p 5432 -q -U postgres
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
+  client:
+    image: nginx:stable
+    volumes:
+      - "./client/dist:/usr/share/nginx/html"
+    ports:
+      - "15002:80"
+
+  server:
+    build: ./server
+    command: gunicorn -w 3 -b 0.0.0.0:80 app:app
+    volumes:
+      - "./server:/srv/app"
+    ports:
+      - "15001:80"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:stable
+    volumes:
+      - "./nginx:/etc/nginx/conf.d"
+    ports:
+      - "80:80"
+    depends_on:
+      - client
+      - server

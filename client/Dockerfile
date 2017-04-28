@@ -1,1 +1,0 @@
-FROM celeo/yarn:latest
