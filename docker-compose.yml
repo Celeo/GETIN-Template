@@ -7,7 +7,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: pg_isready -h localhost -p 5432 -q -U postgres
+      test: pg_isready -h localhost -p 5432 -q -U postgres -d postgres
       interval: 3s
       timeout: 5s
       retries: 5
@@ -15,13 +15,14 @@ services:
   client:
     image: nginx:stable
     volumes:
+      - "./nginx/client:/etc/nginx/conf.d"
       - "./client/dist:/usr/share/nginx/html"
     ports:
       - "15002:80"
 
   server:
     build: ./server
-    command: gunicorn -w 3 -b 0.0.0.0:80 app:app
+    command: gunicorn -b 0.0.0.0:80 app:app
     volumes:
       - "./server:/srv/app"
     ports:
@@ -33,7 +34,7 @@ services:
   nginx:
     image: nginx:stable
     volumes:
-      - "./nginx:/etc/nginx/conf.d"
+      - "./nginx/combined:/etc/nginx/conf.d"
     ports:
       - "80:80"
     depends_on:
