@@ -19,7 +19,6 @@ api = Api(app)
 
 db.app = app
 db.init_app(app)
-db.create_all()
 
 eveapi['user_agent'] = '? for GETIN alliance'
 eveapi['crest'] = CREST(

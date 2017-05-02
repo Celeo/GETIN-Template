@@ -8,35 +8,35 @@ services:
       - "5432:5432"
     healthcheck:
       test: pg_isready -h localhost -p 5432 -q -U postgres -d postgres
-      interval: 3s
+      interval: 5s
       timeout: 5s
       retries: 5
 
-  client:
-    image: nginx:stable
+  db_setup:
+    build: ./server
+    command: python setup_db.py
     volumes:
-      - "./nginx/client:/etc/nginx/conf.d"
-      - "./client/dist:/usr/share/nginx/html"
-    ports:
-      - "15002:80"
+      - "./server:/srv/app"
+    depends_on:
+      db:
+        condition: service_healthy
 
   server:
     build: ./server
-    command: gunicorn -b 0.0.0.0:80 app:app
+    command: gunicorn --access-logfile - -w 3 -b 0.0.0.0:80 app:app
     volumes:
       - "./server:/srv/app"
     ports:
       - "15001:80"
     depends_on:
-      db:
-        condition: service_healthy
+      - db_setup
 
   nginx:
     image: nginx:stable
     volumes:
-      - "./nginx/combined:/etc/nginx/conf.d"
+      - "./nginx:/etc/nginx/conf.d"
+      - "./client/dist:/usr/share/nginx/html"
     ports:
       - "80:80"
     depends_on:
-      - client
       - server
