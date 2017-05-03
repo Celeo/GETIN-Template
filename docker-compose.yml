@@ -12,7 +12,7 @@ services:
     build: ./server
     command: python setup_db.py
     volumes:
-      - "./server:/srv/app"
+      - ./server:/srv/app
     depends_on:
       db:
         condition: service_healthy
@@ -21,9 +21,9 @@ services:
     build: ./server
     command: bash flask_debug.sh
     ports:
-      - "5000:5000"
+      - 5000:5000
     volumes:
-      - "./server:/srv/app"
+      - ./server:/srv/app
     depends_on:
       - db_setup
 
@@ -31,6 +31,7 @@ services:
     build: ./client
     command: yarn run dev
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
-      - "./client:/srv/app"
+      - ./client:/srv/app
+      - /srv/app/node_modules
