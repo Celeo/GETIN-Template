@@ -29,7 +29,7 @@ services:
 
   client:
     build: ./client
-    command: /usr/local/bin/node build/dev-server.js
+    command: yarn run dev
     ports:
       - "8080:8080"
     volumes:
