@@ -30,17 +30,22 @@ This is the starting place for web apps created for the EVE GETIN alliance with 
 ## Development
 
 ```bash
-docker-compose up
+$ docker-compose up
 ```
 
-Open your browser to `http://localhost:8080`.
+Open your browser to `http://localhost:8080`. This dev environment runs both Flask and webpack in their debug modes, so changes
+you make on your filesystem will be reflected in the running Docker containers.
 
 ## Production
 
 Make any necessary changes to the server's configuration.
 
 ```bash
-docker-compose up -f docker-compose.production.yml
+$ cd client
+$ yarn run build
+$ cd ..
+$ docker-compose up -f docker-compose.production.yml
 ```
 
-Open your browser to `http://[server_ip_or_name]`.
+Open your browser to `http://[server_ip_or_name]`. This prod environment runs the server with Gunicorn and a few workers and uses
+Nginx both as a proxy server and a static file server to serve the compiled client files to the user.
