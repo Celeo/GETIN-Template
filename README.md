@@ -18,20 +18,29 @@ This is the starting place for web apps created for the EVE GETIN alliance with 
 
 **System**
 * [PostgreSQL](https://www.postgresql.org/) - database
-* [Docker](https://www.docker.com/), [docker-compose](https://docs.docker.com/compose/) - deployment images
+* [Docker](https://www.docker.com/), [docker-compose](https://docs.docker.com/compose/) - development and deployment containers
 
 ## Setup
 
-1. Clone down the repo
-2. Install front-end requirements with `cd client && yarn` or `cd client && npm install`
-3. Setup a Python virtual environment (latest Python 3) with `cd server && virtualenv env -p python3 && source env/bin/activate`
-4. Install back-end requirements with `cd server && pip install -r requirements.txt`
-5. Build the Docker images with `docker-compose build`
+1. Install Docker and Docker-compose on your system. You don't need Python, Node, or Postgres.
+2. Clone down the repo
+3. Build the Docker images with `docker-compose build`
+4. Copy *config.example.cfg* to *config.cfg* and fill in the fields.
 
 ## Development
 
-TBD
+```bash
+docker-compose up
+```
+
+Open your browser to `http://localhost:8080`.
 
 ## Production
 
-TBD
+Make any necessary changes to the server's configuration.
+
+```bash
+docker-compose up -f docker-compose.production.yml
+```
+
+Open your browser to `http://[server_ip_or_name]`.

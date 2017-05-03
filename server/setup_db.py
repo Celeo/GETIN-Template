@@ -13,7 +13,7 @@ def log(s):
 def main():
     for i in range(5):
         try:
-            print(f'Attempt #{i} to connect to database ...')
+            print(f'Attempt #{i+1} to connect to database ...')
             db.create_all()
             print('Database models created')
             break
