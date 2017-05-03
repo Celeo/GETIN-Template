@@ -32,3 +32,5 @@ services:
     command: /usr/local/bin/node build/dev-server.js
     ports:
       - "8080:8080"
+    volumes:
+      - "./client:/srv/app"

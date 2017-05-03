@@ -6,6 +6,6 @@ WORKDIR /tmp
 COPY package.json /tmp
 RUN yarn
 
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN cp -a /tmp/node_modules /usr/src/app
+RUN mkdir /srv/app
+WORKDIR /srv/app
+RUN cp -a /tmp/node_modules /srv/app
