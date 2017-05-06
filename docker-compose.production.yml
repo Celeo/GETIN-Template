@@ -30,7 +30,7 @@ services:
   nginx:
     image: nginx:stable
     volumes:
-      - "./nginx/prod:/etc/nginx/conf.d"
+      - "./nginx:/etc/nginx/conf.d"
       - "./client/dist:/usr/share/nginx/html"
     ports:
       - "80:80"
