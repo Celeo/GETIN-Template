@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:9
     volumes:
-      - "/srv/getin-template:/var/lib/postgresql/data"
+      - "/srv/_data/getin-template:/var/lib/postgresql/data"
     healthcheck:
       test: pg_isready -h localhost -p 5432 -q -U postgres -d postgres
       interval: 5s
