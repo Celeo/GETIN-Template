@@ -1,6 +1,0 @@
-**/env
-.git
-*.md
-*.sh
-**/Dockerfile
-**/node_modules
