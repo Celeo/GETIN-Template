@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask import request
 from flask_restful import Resource
 from jose import jwt
@@ -36,6 +38,7 @@ class EVE_SSO_Resource(Resource):
                 db.session.add(user)
             db.session.commit()
             token_data = {
+                'exp': int((datetime.utcnow() + timedelta(hours=12)).strftime('%s')) * 1000,
                 'name': char_name,
                 'corporation': corporation,
                 'inAlliance': user.in_alliance

@@ -31,7 +31,7 @@ export default {
       const response = await this.$store.getters.axios.post(`${Vue.config.SERVER_URL}eve/sso`, { code })
       const { token } = response.data
       const tokenData = decode(token)
-      window.sessionStorage.setItem('token', token)
+      window.localStorage.setItem('token', token)
       this.$store.commit('LOG_IN', { token, tokenData })
       this.$router.push({ name: 'Landing' })
       this.processing = false

@@ -21,16 +21,19 @@ if (process.env.NODE_ENV === 'development') {
 Vue.config.SERVER_URL = url
 console.log(`Server url: ${url}`)
 
-const token = window.sessionStorage.getItem('token')
+const token = window.localStorage.getItem('token')
 if (token) {
   const tokenData = decode(token)
   if (typeof tokenData.name !== 'undefined') {
+    if (tokenData.exp < new Date().getTime()) {
+      console.log('Token is expired')
+      window.localStorage.removeItem('token')
+    }
+    console.log(`Login token expires on ${new Date(tokenData.exp)}`)
     store.commit('LOG_IN', { token, tokenData })
   } else {
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('token')
   }
-} else {
-  window.sessionStorage.removeItem('token')
 }
 
 new Vue({

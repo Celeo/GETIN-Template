@@ -4,7 +4,7 @@
       div(v-if="!error")
         h1.title Log in
         h2.subtitle Sign in with EVE's SSO
-        a(:href="url")
+        a(:href="url" v-if="url")
           img(src="../assets/login.png")
       div(v-else)
         server-error
